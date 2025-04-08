@@ -13,6 +13,10 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
+	const [articleState, setArticleState] =
+		useState<ArticleStateType>(defaultArticleState);
+
+		
 	return (
 		<div
 			className={clsx(styles.main)}
@@ -25,7 +29,11 @@ const App = () => {
 					'--bg-color': defaultArticleState.backgroundColor.value,
 				} as CSSProperties
 			}>
-			<ArticleParamsForm />
+			<ArticleParamsForm
+				currentState={articleState}
+				onApply={handleApply}
+				onReset={handleReset}
+			/>
 			<Article />
 		</div>
 	);

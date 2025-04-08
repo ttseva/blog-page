@@ -7,19 +7,30 @@ import styles from './ArrowButton.module.scss';
 /** Функция для обработки открытия/закрытия формы */
 export type OnClick = () => void;
 
-export const ArrowButton = () => {
+interface ArrowButtonProps {
+	isOpen: boolean;
+	onClick: OnClick;
+}
+
+export const ArrowButton = ({ isOpen, onClick }: ArrowButtonProps) => {
 	return (
 		/* Не забываем указаывать role и aria-label атрибуты для интерактивных элементов */
 		<div
 			role='button'
-			aria-label='Открыть/Закрыть форму параметров статьи'
+			aria-label={
+				isOpen
+					? 'Закрыть форму параметров статьи'
+					: 'Открыть форму параметров статьи'
+			}
 			tabIndex={0}
-			className={styles.container}
-		>
+			onClick={onClick}
+			className={clsx(styles.container, {
+				[styles.arrow_open]: isOpen,
+			})}>
 			<img
 				src={arrow}
 				alt='иконка стрелочки'
-				className={styles.arrow}
+				className={clsx(styles.arrow, isOpen ? styles.arrow_open : null)}
 			/>
 		</div>
 	);
