@@ -1,10 +1,11 @@
 import { createRoot } from 'react-dom/client';
-import { StrictMode, CSSProperties } from 'react';
+import { StrictMode, CSSProperties, useState } from 'react';
 import clsx from 'clsx';
 
 import { Article } from './components/article/Article';
 import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
 import { defaultArticleState } from './constants/articleProps';
+import { ArticleStateType } from './constants/articleProps';
 
 import './styles/index.scss';
 import styles from './styles/index.module.scss';
@@ -15,8 +16,19 @@ const root = createRoot(domNode);
 const App = () => {
 	const [articleState, setArticleState] =
 		useState<ArticleStateType>(defaultArticleState);
+	const [isFormOpen, setIsFormOpen] = useState(false);
+	const [settings, setSettings] = useState(defaultArticleState);
 
-		
+	const handleApply = (newSettings: ArticleStateType) => {
+		setSettings(newSettings);
+		setIsFormOpen(false); // Закрываем форму после применения
+	};
+
+	// Обработчик для "Сбросить"
+	const handleReset = () => {
+		setSettings(defaultArticleState);
+	};
+
 	return (
 		<div
 			className={clsx(styles.main)}

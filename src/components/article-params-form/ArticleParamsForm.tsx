@@ -32,14 +32,13 @@ export const ArticleParamsForm = ({
 	onReset,
 }: ArticleParamsFormProps) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const toggle = () => setIsOpen(!isOpen);
-
-
 	const [formState, setFormState] = useState(currentState);
+
+	const toggle = () => setIsOpen(!isOpen);
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} onClick={toggle()} />
+			<ArrowButton isOpen={isOpen} onClick={toggle} />
 			<aside
 				className={clsx(
 					styles.container,
