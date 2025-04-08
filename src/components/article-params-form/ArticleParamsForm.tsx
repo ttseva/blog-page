@@ -35,6 +35,12 @@ export const ArticleParamsForm = ({
 	const [formState, setFormState] = useState(currentState);
 
 	const toggle = () => setIsOpen(!isOpen);
+	const handleCloseForm = (e: React.MouseEvent) => {
+		const formElement = document.querySelector(`.${styles.container}`);
+		if (formElement && !formElement.contains(e.target as Node)) {
+			toggle;
+		}
+	};
 
 	return (
 		<>

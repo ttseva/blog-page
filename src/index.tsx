@@ -16,31 +16,26 @@ const root = createRoot(domNode);
 const App = () => {
 	const [articleState, setArticleState] =
 		useState<ArticleStateType>(defaultArticleState);
-	const [isFormOpen, setIsFormOpen] = useState(false);
-	const [settings, setSettings] = useState(defaultArticleState);
 
-	const handleApply = (newSettings: ArticleStateType) => {
-		setSettings(newSettings);
-		setIsFormOpen(false); // Закрываем форму после применения
+	const getCurrentState = () => {
+		return {
+			'--font-family': articleState.fontFamilyOption.value,
+			'--font-size': articleState.fontSizeOption.value,
+			'--font-color': articleState.fontColor.value,
+			'--container-width': articleState.contentWidth.value,
+			'--bg-color': articleState.backgroundColor.value,
+		} as CSSProperties;
 	};
 
-	// Обработчик для "Сбросить"
+	const handleApply = (newArticleState: ArticleStateType) => {
+		setArticleState(newArticleState);
+	};
 	const handleReset = () => {
-		setSettings(defaultArticleState);
+		setArticleState(defaultArticleState);
 	};
 
 	return (
-		<div
-			className={clsx(styles.main)}
-			style={
-				{
-					'--font-family': defaultArticleState.fontFamilyOption.value,
-					'--font-size': defaultArticleState.fontSizeOption.value,
-					'--font-color': defaultArticleState.fontColor.value,
-					'--container-width': defaultArticleState.contentWidth.value,
-					'--bg-color': defaultArticleState.backgroundColor.value,
-				} as CSSProperties
-			}>
+		<div className={clsx(styles.main)} style={getCurrentState()}>
 			<ArticleParamsForm
 				currentState={articleState}
 				onApply={handleApply}
