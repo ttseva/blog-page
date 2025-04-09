@@ -38,7 +38,7 @@ const App = () => {
 		<div className={clsx(styles.main)} style={getCurrentState()}>
 			<ArticleParamsForm
 				currentState={articleState}
-				onApply={handleApply}
+				onChange={handleApply}
 				onReset={handleReset}
 			/>
 			<Article />
