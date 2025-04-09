@@ -25,7 +25,7 @@ export const ArrowButton = ({ isOpen, onClick }: ArrowButtonProps) => {
 			tabIndex={0}
 			onClick={onClick}
 			className={clsx(styles.container, {
-				[styles.arrow_open]: isOpen,
+				[styles.container_open]: isOpen,
 			})}>
 			<img
 				src={arrow}
